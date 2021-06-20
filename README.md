@@ -5,7 +5,8 @@ Latest news for almost 55 country. Feature of saving article and search ariticle
 # Used API
 https://newsapi.org/
 
-
+## note:
+if data is not getting fech it is because  I am using devloper package and there is only 100 requests per day for user. So try again after 24 hours.(link for more information about pricing 'https://newsapi.org/pricing') 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
