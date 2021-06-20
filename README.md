@@ -9,7 +9,7 @@ https://newsapi.org/
 if data is not getting fech it is because  I am using devloper package and there is only 100 requests per day for user. So try again after 24 hours.(link for more information about pricing 'https://newsapi.org/pricing') 
 # Screen Shots
 ### Splash Screen
-<img src="https://user-images.githubusercontent.com/63836638/122664807-326f9980-d1c1-11eb-994e-c146a05705da.png" align="left" height="48" width="48" >
+<img src="https://user-images.githubusercontent.com/63836638/122664807-326f9980-d1c1-11eb-994e-c146a05705da.png" align="left" height="500" width="100" >
 ### Home Page
 ![image](https://user-images.githubusercontent.com/63836638/122664820-50d59500-d1c1-11eb-8f02-8fef2c110da8.png)
 ### different  category 
