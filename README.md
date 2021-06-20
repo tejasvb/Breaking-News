@@ -22,7 +22,7 @@ if data is not getting fech it is because  I am using devloper package and there
 ### Search Articles
 <img src="https://user-images.githubusercontent.com/63836638/122664919-dd805300-d1c1-11eb-9ee5-40a21d470f4d.png" align="left" height="500" width="250" >
 ### Saved Articles
-<img src="https://user-images.githubusercontent.com/63836638/122664933-f557d700-d1c1-11eb-9916-7a01aacc0e04.png" align="left" height="500" width="250" >
+<img src="https://user-images.githubusercontent.com/63836638/122664933-f557d700-d1c1-11eb-9916-7a01aacc0e04.png" align="left" height="500" width="250" ><br/>
 ## Getting Started
 
 This project is a starting point for a Flutter application.
