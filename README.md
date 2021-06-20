@@ -4,7 +4,7 @@ Latest news for almost 55 country. Feature of saving article and search ariticle
 <h1>  Used API</h1> 
 https://newsapi.org/
 <h1>  Note:</h1> 
-if data is not getting fech it is because  I am using devloper package and there is only 100 requests per day for user. So try again after 24 hours.(link for more information about pricing 'https://newsapi.org/pricing') 
+if data is not getting fech in application it is because  I am using devloper package and there is only 100 requests per day for user. So try again after 24 hours.(link for more information about pricing 'https://newsapi.org/pricing') 
 <h1> Screen Shots</h1>
 
 | Splash Screen  | Home Page   | List of countries |
