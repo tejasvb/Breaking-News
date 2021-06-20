@@ -1,8 +1,8 @@
 
-logo.png![logo](https://user-images.githubusercontent.com/63836638/122662730-e3226c80-d1b2-11eb-815e-f4ed09ad77ea.png)
+logo.png![logo](https://user-images.githubusercontent.com/63836638/122662730-e3226c80-d1b2-11eb-815e-f4ed09ad77ea.png,)
 # Breaking News
-Latest news for almost 55 country. Feature of saving article and search ariticles.
-#Used API
+Latest news for almost 55 country. Feature of saving article and search ariticles.<br/>
+# Used API
 https://newsapi.org/
 
 
