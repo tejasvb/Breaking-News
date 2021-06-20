@@ -11,7 +11,7 @@ if data is not getting fech it is because  I am using devloper package and there
 ### Splash Screen
 <img src="https://user-images.githubusercontent.com/63836638/122664807-326f9980-d1c1-11eb-994e-c146a05705da.png" align="left" height="500" width="250" >
 ### Home Page
-<img src="https://user-images.githubusercontent.com/63836638/122664820-50d59500-d1c1-11eb-8f02-8fef2c110da8.png" align="left" height="500" width="250" >
+<img src="https://user-images.githubusercontent.com/63836638/122664820-50d59500-d1c1-11eb-8f02-8fef2c110da8.png" align="left" height="500" width="250" ><br/>
 ### different  category 
 <img src="https://user-images.githubusercontent.com/63836638/122664823-559a4900-d1c1-11eb-846f-858aeca6c06c.png" align="left" height="500" width="250" >
 <img src="https://user-images.githubusercontent.com/63836638/122664845-65199200-d1c1-11eb-9b54-1b2d634e1384.png" align="left" height="500" width="250" >
