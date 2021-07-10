@@ -10,8 +10,6 @@ void setupLocator() {
 
 void main() {
   setupLocator();
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp,DeviceOrientation.portraitUp]);
   runApp(MyApp());
 }
 
