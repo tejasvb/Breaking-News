@@ -11,11 +11,13 @@ https://youtu.be/mV9P5qiU4Kg
 
 | Splash Screen  | Home Page   | List of countries |
 |:--------:|:--------:|:--------:|
-|  <img src="https://user-images.githubusercontent.com/63836638/122667492-baa96b00-d1d0-11eb-94ee-23bd4b91f6f1.png"  height="470" width="240" >   | <img src="https://user-images.githubusercontent.com/63836638/122667501-c137e280-d1d0-11eb-96be-4b3dec27355b.png"  height="470" width="240" > | <img src="https://user-images.githubusercontent.com/63836638/122666198-8ed6b700-d1c9-11eb-9745-9d195051fc93.png"  height="470" width="240" > | <img src="https://user-images.githubusercontent.com/63836638/122666210-a31ab400-d1c9-11eb-9986-578801f2d486.png"  height="470" width="240" >|
+|  <img src="https://user-images.githubusercontent.com/63836638/128599201-65f48f94-c06f-46c4-ac4f-e5a37af5c4d5.jpg"  height="470" width="240" >   | <img src="https://user-images.githubusercontent.com/63836638/128599103-c3374d39-7110-4ad2-bcc2-e7f40d133d86.jpg"  height="470" width="250" > | <img src="https://user-images.githubusercontent.com/63836638/128599246-58b33ff7-9834-4695-a857-f5bd68a5edf7.jpg"  height="470" width="250" > | <img src="https://user-images.githubusercontent.com/63836638/122666210-a31ab400-d1c9-11eb-9986-578801f2d486.png"  height="470" width="250" >|
 | Different Category |  Different Category  | Specific Country |
-| <img src="https://user-images.githubusercontent.com/63836638/122667287-ab75ed80-d1cf-11eb-86c3-054767d9fc17.png"  height="470" width="240" >   |  <img src="https://user-images.githubusercontent.com/63836638/122667308-cb0d1600-d1cf-11eb-985a-fae41bda9036.png"  height="470" width="240" >  | <img src="https://user-images.githubusercontent.com/63836638/122667341-fee83b80-d1cf-11eb-8712-bf92b723fc46.png"  height="470" width="240" > |<img src="https://user-images.githubusercontent.com/63836638/122667317-d82a0500-d1cf-11eb-8e04-44024bda4025.png"  height="470" width="240" >|
+| <img src="https://user-images.githubusercontent.com/63836638/128599315-793b92b2-0332-4140-9ea9-64957ea82c8d.jpg"  height="470" width="250" >   |  <img src="https://user-images.githubusercontent.com/63836638/128599282-d37d8fb5-2ea3-4522-94be-136e7ee167ac.jpg"  height="470" width="250" >  | <img src="https://user-images.githubusercontent.com/63836638/128599276-f5e95773-932e-409f-b6d9-db202d54ba18.jpg"  height="470" width="250" > |<img src="https://user-images.githubusercontent.com/63836638/122667317-d82a0500-d1cf-11eb-8e04-44024bda4025.png"  height="470" width="250" >|
 | Search Articles|Saved Articles|
-| <img src="https://user-images.githubusercontent.com/63836638/122666210-a31ab400-d1c9-11eb-9986-578801f2d486.png"  height="470" width="240" >|<img src="https://user-images.githubusercontent.com/63836638/122667317-d82a0500-d1cf-11eb-8e04-44024bda4025.png"  height="470" width="240" >|
+| <img src="https://user-images.githubusercontent.com/63836638/128599328-30f05797-a234-4b3a-8d94-cd771d14af8d.jpg"  height="470" width="250" >|<img src="https://user-images.githubusercontent.com/63836638/128599336-bd79a3e9-08ae-47d6-a014-0048ecf8112f.jpg"  height="470" width="250" >|
+
+
 
 
  <h3>Getting Started </h3>
