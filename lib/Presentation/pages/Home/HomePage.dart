@@ -3,9 +3,6 @@ import 'package:news/Presentation/bottomNavigationPages/SavedNews/SavedArticle.d
 import 'package:news/Presentation/bottomNavigationPages/SearchNews/SearchScreen.dart';
 import 'package:news/Presentation/bottomNavigationPages/specificCountryNews/SpecificCountryNews.dart';
 
-
-
-
 class HomePage extends StatefulWidget {
   static List<Widget> _widgetOptions = <Widget>[
     SpecificCountryNews(
@@ -23,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-
+  final pageController = PageController();
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -34,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
-        selectedItemColor: Theme.of(context).accentColor,
+          selectedItemColor: Theme.of(context).accentColor,
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.receipt_long),
@@ -55,12 +52,18 @@ class _HomePageState extends State<HomePage> {
           type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
           iconSize: 20,
-          onTap: _onItemTapped,
+          onTap:(index)=> pageController.jumpToPage(index),
           elevation: 5),
-      body:IndexedStack(
-        children:  HomePage._widgetOptions,
-        index: _selectedIndex,
+      body: PageView(
+        children: HomePage._widgetOptions,
+        controller: pageController,
+        onPageChanged: _onItemTapped,
       ),
     );
+  }
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 }

@@ -28,7 +28,7 @@ class SavedArticle extends StatefulWidget {
   _SavedArticleState createState() => _SavedArticleState();
 }
 
-class _SavedArticleState extends State<SavedArticle> {
+class _SavedArticleState extends State<SavedArticle> with AutomaticKeepAliveClientMixin{
   Map<String, dynamic> getData;
   List<Map<String, dynamic>> listOfData = [];
   ThemeData _currentTheme;
@@ -49,6 +49,7 @@ class _SavedArticleState extends State<SavedArticle> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     _currentTheme = Theme.of(context);
     return MaterialApp(
       home: Scaffold(
@@ -71,7 +72,7 @@ class _SavedArticleState extends State<SavedArticle> {
                 listOfData.clear();
               }
               if (snapshot.hasData) {
-                int i = 2;
+                int i = 0;
                 while (true) {
                   try {
                     String str = _getText(snapshot.data[i]);
@@ -118,6 +119,10 @@ class _SavedArticleState extends State<SavedArticle> {
       ),
     );
   }
+
+  @override
+
+  bool get wantKeepAlive => false;
 
 }
 

@@ -19,11 +19,12 @@ class SpecificCountryNews extends StatefulWidget {
   _SpecificCountryNewsState createState() => _SpecificCountryNewsState();
 }
 
-class _SpecificCountryNewsState extends State<SpecificCountryNews> {
+class _SpecificCountryNewsState extends State<SpecificCountryNews> with AutomaticKeepAliveClientMixin{
   ThemeData _currentTheme;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     BuildContext themeContext =
         (widget.themeContext != null) ? widget.themeContext : context;
     _currentTheme = Theme.of(themeContext);
@@ -141,4 +142,7 @@ class _SpecificCountryNewsState extends State<SpecificCountryNews> {
           ),
         ));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

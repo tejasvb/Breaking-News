@@ -11,7 +11,7 @@ class SearchScreen extends StatefulWidget {
   _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchScreenState extends State<SearchScreen> {
+class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClientMixin {
   NewsService get service => GetIt.I<NewsService>();
 
   final search = TextEditingController(text: '');
@@ -49,6 +49,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     currentTheme = Theme.of(context);
     return Container(
       color: currentTheme.primaryColor,
@@ -157,4 +158,7 @@ class _SearchScreenState extends State<SearchScreen> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
