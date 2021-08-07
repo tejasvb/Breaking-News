@@ -7,23 +7,17 @@ class NewsService {
   static const String API_KEY = 'f96331be8ca34b80855e89bb563105f1';
 
   Future<APIResponse<List<NewsForListing>>> getNewsList(
-      {String category, String field,String type,String query}) {
-
-    if(type == "everything"){
+      {String category, String field, String type, String query}) {
+    if (type == "everything") {
       String everything =
-          'https://newsapi.org/v2/everything?q=$query&from=2021-06-09&to=2021-06-09&sortBy=popularity&apiKey=';
+          'https://newsapi.org/v2/everything?q=$query&sortBy=popularity&apiKey=';
       return result(everything + API_KEY);
-    }
-   else{
-
+    } else {
       String topHeadLing =
           'https://newsapi.org/v2/top-headlines?country=$field&category=$category&apiKey=';
 
       return result(topHeadLing + API_KEY);
-
     }
-
-
   }
 
   Future<APIResponse<List<NewsForListing>>> result(String url) {

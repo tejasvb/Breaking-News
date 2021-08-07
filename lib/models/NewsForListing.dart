@@ -7,7 +7,7 @@ class NewsForListing {
   Uri url;
   Uri urlToImage;
   String publishedAt;
-  String content;
+
 
   NewsForListing(
       {this.id,
@@ -18,7 +18,7 @@ class NewsForListing {
       this.url,
       this.urlToImage,
       this.publishedAt,
-      this.content});
+      });
 
   factory NewsForListing.fromJson(Map<String, dynamic> item) {
     return NewsForListing(
@@ -39,9 +39,6 @@ class NewsForListing {
           item['urlToImage'] != null ? Uri.parse(item['urlToImage']) : null,
       publishedAt: item['publishedAt'].toString() != null
           ? item['publishedAt'].toString()
-          : null,
-      content: item['content'].toString() != null
-          ? item['content'].toString()
           : null,
     );
   }
