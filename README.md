@@ -6,7 +6,7 @@ https://newsapi.org/
 <h1>  Note:</h1> 
 if data is not getting fech in application it is because  I am using devloper package and there is only 100 requests per day for user. So try again after 24 hours.(link for more information about pricing 'https://newsapi.org/pricing') 
 <h1>  Video Link:</h1> 
-https://youtu.be/mV9P5qiU4Kg
+https://www.youtube.com/watch?v=TSUq0klTqzo
 <h1> Screen Shots</h1>
 
 | Splash Screen  | Home Page   | List of countries |
