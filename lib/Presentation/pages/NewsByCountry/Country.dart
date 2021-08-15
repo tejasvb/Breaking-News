@@ -6,9 +6,10 @@ import 'package:news/Presentation/Widgets/TileCountry.dart';
 class Country extends StatelessWidget {
   final BuildContext themeContext;
  const Country({@required this.themeContext});
-
   @override
   Widget build(BuildContext context) {
+    var _isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+     ThemeData _currentTheme = Theme.of(themeContext);
     return MaterialApp(
       title: 'Country',
       home: Scaffold(
@@ -21,25 +22,29 @@ class Country extends StatelessWidget {
           ),
         ),
         body: Container(
-          color: Theme.of(themeContext).primaryColor,
-          child: GridView.count(
-            crossAxisCount: 3,
-            crossAxisSpacing: 4.0,
-            mainAxisSpacing: 8.0,
-            children: List.generate(listCountry.length, (index) {
-              return Center(
-                child: TileCountry(
-                    name: listCountry[index].title,
-                    url: listCountry[index].url,
-                    sub: listCountry[index].sub,
-                  themeContext  : themeContext,
-                ),
-              );
-            }),
+          color: _currentTheme.primaryColor,
+          child: RawScrollbar(
+              thumbColor:_currentTheme.accentColor,
+              interactive: true,
+              child: GridView.count(
+                crossAxisCount: _isPortrait? 3:4,
+                crossAxisSpacing: 4.0,
+                mainAxisSpacing: 8.0,
+                children: List.generate(listCountry.length, (index) {
+                  return Center(
+                    child: TileCountry(
+                      name: listCountry[index].title,
+                      url: listCountry[index].url,
+                      sub: listCountry[index].sub,
+                      themeContext  : themeContext,
+                    ),
+                  );
+                }),
+              ),
+            ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
 

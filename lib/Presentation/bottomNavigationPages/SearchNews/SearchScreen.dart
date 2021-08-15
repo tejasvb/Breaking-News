@@ -45,14 +45,14 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
     });
   }
 
-  ThemeData currentTheme;
+  ThemeData _currentTheme;
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    currentTheme = Theme.of(context);
+    _currentTheme = Theme.of(context);
     return Container(
-      color: currentTheme.primaryColor,
+      color: _currentTheme.primaryColor,
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -64,10 +64,10 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
                         height: 70,
                         child: TextField(
                                   cursorColor:
-                                      currentTheme.secondaryHeaderColor,
+                                  _currentTheme.secondaryHeaderColor,
                                   autofocus: true,
                                   style: TextStyle(
-                                      color: currentTheme.accentColor,
+                                      color: _currentTheme.accentColor,
                                       fontSize: 20),
                                   maxLines: 1,
                                   controller: search,
@@ -83,27 +83,27 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
                                     alignLabelWithHint: true,
                                     hintStyle: TextStyle(
                                         color:
-                                            currentTheme.secondaryHeaderColor,
+                                        _currentTheme.secondaryHeaderColor,
                                         fontSize: 20),
                                     prefixIcon: Icon(Icons.search,
-                                        color: currentTheme.accentColor),
+                                        color: _currentTheme.accentColor),
                                     suffixIcon: GestureDetector(
                                         onTap: () {
                                           search.clear();
                                         },
                                         child: Icon(Icons.clear,
-                                            color: currentTheme.accentColor)),
+                                            color: _currentTheme.accentColor)),
                                     border: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                        color: currentTheme.accentColor,
+                                        color: _currentTheme.accentColor,
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
-                                    focusColor: currentTheme.accentColor,
+                                    focusColor: _currentTheme.accentColor,
                                     focusedBorder: OutlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: currentTheme.accentColor,
+                                          color: _currentTheme.accentColor,
                                           width: 2.0),
                                       borderRadius: BorderRadius.circular(20.0),
                                     ),
@@ -118,7 +118,7 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
                 if (_isLoading) {
                   return Center(
                       child: CircularProgressIndicator(
-                    color: currentTheme.accentColor,
+                    color: _currentTheme.accentColor,
                   ));
                 }
 
@@ -130,7 +130,7 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
                     physics: ScrollPhysics(),
                     shrinkWrap: true,
                     separatorBuilder: (BuildContext _, int index) => Divider(
-                        height: 3, color: currentTheme.secondaryHeaderColor),
+                        height: 3, color: _currentTheme.secondaryHeaderColor),
                     itemBuilder: (BuildContext _, int index) {
                       return SecondaryNewsCard(
                         source: _apiResponse.data[index].source.toString(),

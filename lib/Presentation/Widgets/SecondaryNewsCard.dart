@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 bool exist = true;
 
@@ -15,7 +16,6 @@ class SecondaryNewsCard extends StatefulWidget {
   final String image;
   final String url;
   final BuildContext themeContext;
-
 
   SecondaryNewsCard({
     @required this.author,
@@ -44,7 +44,10 @@ class _SecondaryNewsCardState extends State<SecondaryNewsCard> {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData currentTheme = Theme.of(widget.themeContext);
+    double textSize = MediaQuery.of(context).orientation == Orientation.portrait
+        ? MediaQuery.of(context).size.height * 0.001
+        : MediaQuery.of(context).size.width * 0.0012;
+    ThemeData _currentTheme = Theme.of(widget.themeContext);
     RegExp regexDate = new RegExp(patternDate);
     if ((widget.source == null) && (widget.author == null)) {
       check = false;
@@ -82,11 +85,10 @@ class _SecondaryNewsCardState extends State<SecondaryNewsCard> {
                 child: RichText(
                   maxLines: 3,
                   overflow: TextOverflow.ellipsis,
-                  strutStyle: StrutStyle(fontSize: 14.0),
                   text: TextSpan(
                       style: TextStyle(
-                          color: currentTheme.accentColor,
-                          fontSize: 13,
+                          color: _currentTheme.accentColor,
+                          fontSize: textSize * 19,
                           fontFamily: 'PlayfairDisplay'),
                       text: widget.title),
                 ),
@@ -115,10 +117,10 @@ class _SecondaryNewsCardState extends State<SecondaryNewsCard> {
                 if (check)
                   RichText(
                     overflow: TextOverflow.ellipsis,
-                    strutStyle: StrutStyle(fontSize: 14.0),
+                    strutStyle: StrutStyle(fontSize: textSize * 13),
                     text: TextSpan(
                         style: TextStyle(
-                          color: currentTheme.secondaryHeaderColor,
+                          color: _currentTheme.secondaryHeaderColor,
                         ),
                         text: name),
                   ),
@@ -137,10 +139,10 @@ class _SecondaryNewsCardState extends State<SecondaryNewsCard> {
               Flexible(
                 child: RichText(
                   overflow: TextOverflow.ellipsis,
-                  strutStyle: StrutStyle(fontSize: 13.0),
+                  strutStyle: StrutStyle(fontSize: textSize * 13),
                   text: TextSpan(
                       style: TextStyle(
-                        color: currentTheme.secondaryHeaderColor,
+                        color: _currentTheme.secondaryHeaderColor,
                       ),
                       text: date),
                 ),
@@ -148,47 +150,19 @@ class _SecondaryNewsCardState extends State<SecondaryNewsCard> {
               SizedBox(
                 width: 20,
               ),
-              FutureBuilder(
-                future: _doesFileExist(widget.title),
-                builder: (ctx, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasError) {
-                      return GestureDetector(
-                        onTap: () async {
-                          final directory =
-                              await getApplicationDocumentsDirectory();
-                          final file =
-                              File('${directory.path}/${widget.title}.txt');
-                          final text = {
-                            "author": widget.author,
-                            "title": widget.title,
-                            "image": widget.image,
-                            "publishedAt": widget.publishedAt,
-                            "source": widget.source,
-                            "url": widget.url,
-                          };
-                          await file.writeAsString(text.toString());
-                          setState(() {});
-                        },
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundColor: currentTheme.primaryColor,
-                          child: Icon(
-                            Icons.bookmark_border,
-                            size: 25,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      );
-                    } else if (snapshot.hasData) {
-                      if (!snapshot.data)
+              if (!kIsWeb)
+                FutureBuilder(
+                  future: _doesFileExist(widget.title),
+                  builder: (ctx, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasError) {
                         return GestureDetector(
                           onTap: () async {
                             final directory =
                                 await getApplicationDocumentsDirectory();
-                            final _filePath =
+                            final file =
                                 File('${directory.path}/${widget.title}.txt');
-                            Map<String, dynamic> articleInfo = {
+                            final text = {
                               "author": widget.author,
                               "title": widget.title,
                               "image": widget.image,
@@ -196,13 +170,12 @@ class _SecondaryNewsCardState extends State<SecondaryNewsCard> {
                               "source": widget.source,
                               "url": widget.url,
                             };
-                            String _jsonString = jsonEncode(articleInfo);
-                            await _filePath.writeAsString(_jsonString);
+                            await file.writeAsString(text.toString());
                             setState(() {});
                           },
                           child: CircleAvatar(
                             radius: 20,
-                            backgroundColor: currentTheme.primaryColor,
+                            backgroundColor: _currentTheme.primaryColor,
                             child: Icon(
                               Icons.bookmark_border,
                               size: 25,
@@ -210,59 +183,89 @@ class _SecondaryNewsCardState extends State<SecondaryNewsCard> {
                             ),
                           ),
                         );
-
-                      if (exist)
-                        return GestureDetector(
-                          onTap: () async {
-                            final directory =
-                                await getApplicationDocumentsDirectory();
-                            final file =
-                                File('${directory.path}/${widget.title}.txt');
-                            file.deleteSync();
-                            setState(() {});
-
-                          },
-                          child: CircleAvatar(
-                            radius: 20,
-                            backgroundColor: currentTheme.primaryColor,
-                            child: Icon(
-                              Icons.bookmark,
-                              size: 25,
-                              color: Colors.grey,
+                      } else if (snapshot.hasData) {
+                        if (!snapshot.data)
+                          return GestureDetector(
+                            onTap: () async {
+                              final directory =
+                                  await getApplicationDocumentsDirectory();
+                              final _filePath =
+                                  File('${directory.path}/${widget.title}.txt');
+                              Map<String, dynamic> articleInfo = {
+                                "author": widget.author,
+                                "title": widget.title,
+                                "image": widget.image,
+                                "publishedAt": widget.publishedAt,
+                                "source": widget.source,
+                                "url": widget.url,
+                              };
+                              String _jsonString = jsonEncode(articleInfo);
+                              await _filePath.writeAsString(_jsonString);
+                              setState(() {});
+                            },
+                            child: CircleAvatar(
+                              radius: 20,
+                              backgroundColor: _currentTheme.primaryColor,
+                              child: Icon(
+                                Icons.bookmark_border,
+                                size: 25,
+                                color: Colors.grey,
+                              ),
                             ),
-                          ),
-                        );
-                    }
-                  }
+                          );
 
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: currentTheme.accentColor,
-                    ),
-                  );
-                },
-              ),
+                        if (exist)
+                          return GestureDetector(
+                            onTap: () async {
+                              final directory =
+                                  await getApplicationDocumentsDirectory();
+                              final file =
+                                  File('${directory.path}/${widget.title}.txt');
+                              file.deleteSync();
+                              setState(() {});
+                            },
+                            child: CircleAvatar(
+                              radius: 20,
+                              backgroundColor: _currentTheme.primaryColor,
+                              child: Icon(
+                                Icons.bookmark,
+                                size: 25,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                      }
+                    }
+
+                    return Center(
+                      child: CircularProgressIndicator(
+                        color: _currentTheme.accentColor,
+                      ),
+                    );
+                  },
+                ),
               SizedBox(
                 width: 20,
               ),
-              GestureDetector(
-                onTap: () async {
-                  final RenderBox box = context.findRenderObject();
-                  await Share.share(widget.url,
-                      subject: widget.title,
-                      sharePositionOrigin:
-                          box.localToGlobal(Offset.zero) & box.size);
-                },
-                child: CircleAvatar(
-                  radius: 20,
-                  backgroundColor: currentTheme.primaryColor,
-                  child: Icon(
-                    Icons.share_outlined,
-                    size: 25,
-                    color: Colors.grey,
+              if (!kIsWeb)
+                GestureDetector(
+                  onTap: () async {
+                    final RenderBox box = context.findRenderObject();
+                    await Share.share(widget.url,
+                        subject: widget.title,
+                        sharePositionOrigin:
+                            box.localToGlobal(Offset.zero) & box.size);
+                  },
+                  child: CircleAvatar(
+                    radius: 20,
+                    backgroundColor: _currentTheme.primaryColor,
+                    child: Icon(
+                      Icons.share_outlined,
+                      size: 25,
+                      color: Colors.grey,
+                    ),
                   ),
                 ),
-              ),
             ],
           ),
         ],

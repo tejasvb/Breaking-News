@@ -11,6 +11,7 @@ class TileCountry extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData _currentTheme = Theme.of(themeContext);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -25,23 +26,26 @@ class TileCountry extends StatelessWidget {
           ),
         );
       },
-      child: Container(
-        color: Theme.of(themeContext).primaryColor,
-        child: Column(
-          children: [
-            SizedBox(
-              height: 90,
-              width: 90,
-              child: Image.network(url),
-            ),
-            Text(
-              name,
-              style: TextStyle(
-                fontSize: 15,
-                color: Theme.of(themeContext).accentColor,
+      child: Hero(
+        tag: name,
+        child: Container(
+          color: _currentTheme.primaryColor,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 90,
+                width: 90,
+                child: Image.network(url),
               ),
-            ),
-          ],
+              Text(
+                name,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: _currentTheme.accentColor,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

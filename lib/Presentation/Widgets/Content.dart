@@ -52,15 +52,16 @@ class _ContentState extends State<Content> {
 
   @override
   Widget build(BuildContext currentContext) {
-    ThemeData currentTheme = Theme.of(widget.themeContext);
+    var _isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+    ThemeData _currentTheme = Theme.of(widget.themeContext);
     return Container(
-      color: currentTheme.primaryColor,
+      color: _currentTheme.primaryColor,
       child: Builder(
         builder: (_) {
           if (_isLoading) {
             return Center(
                 child: CircularProgressIndicator(
-              color: currentTheme.accentColor,
+              color: _currentTheme.accentColor,
             ));
           }
 
@@ -73,9 +74,13 @@ class _ContentState extends State<Content> {
                 Divider(height: 3, color: Colors.grey),
             itemBuilder: (BuildContext context, int index) {
               if (index < 1) {
-                return CarouselSliderForNews(
-                    apiResponse: _apiResponse,
-                    themeContext: widget.themeContext);
+                if (_isPortrait) {
+                  return CarouselSliderForNews(
+                      apiResponse: _apiResponse,
+                      themeContext: widget.themeContext);
+                } else {
+                  return Container();
+                }
               }
               return SecondaryNewsCard(
                 source: _apiResponse.data[index].source.toString(),

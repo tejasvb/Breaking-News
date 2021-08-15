@@ -15,36 +15,36 @@ class CarouselSliderForNews extends StatefulWidget {
 }
 
 class _CarouselSliderForNewsState extends State<CarouselSliderForNews> {
-  ThemeData currentTheme;
+  ThemeData _currentTheme;
   int _current = 0;
   @override
   Widget build(BuildContext currentContext) {
-    currentTheme = Theme.of(widget.themeContext);
+    _currentTheme = Theme.of(widget.themeContext);
     return Container(
       child: Column(
           children: [
         CarouselSlider.builder(
           itemCount: widget.apiResponse.data.length,
-          itemBuilder: (BuildContext context, int index1, int realIndex) {
+          itemBuilder: (BuildContext context, int index, int realIndex) {
             return Material(
-              color:currentTheme.primaryColor,
+              color:_currentTheme.primaryColor,
               child: NewsCard(
-                  source: widget.apiResponse.data[index1].source.toString(),
-                  author: widget.apiResponse.data[index1].author.toString(),
-                  image: widget.apiResponse.data[index1].urlToImage != null
-                      ? widget.apiResponse.data[index1].urlToImage.toString()
+                  source: widget.apiResponse.data[index].source.toString(),
+                  author: widget.apiResponse.data[index].author.toString(),
+                  image: widget.apiResponse.data[index].urlToImage != null
+                      ? widget.apiResponse.data[index].urlToImage.toString()
                       : "https://www.nmaer.com/sysimg/news-news-image.png",
-                  title: widget.apiResponse.data[index1].title.toString(),
+                  title: widget.apiResponse.data[index].title.toString(),
                   publishedAt:
-                      widget.apiResponse.data[index1].publishedAt.toString(),
-                  url: widget.apiResponse.data[index1].url.toString(),
+                      widget.apiResponse.data[index].publishedAt.toString(),
+                  url: widget.apiResponse.data[index].url.toString(),
                 themeContext: widget.themeContext,
               ),
             );
           },
           options: CarouselOptions(
               autoPlay: true,
-              height: 340,
+              height: MediaQuery.of(context).size.height/2.1,
               autoPlayCurve: Curves.fastLinearToSlowEaseIn,
               enableInfiniteScroll: true,
               viewportFraction: 0.9,
@@ -66,7 +66,7 @@ class _CarouselSliderForNewsState extends State<CarouselSliderForNews> {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: _current == index
-                    ? currentTheme.accentColor
+                    ? _currentTheme.accentColor
                     : Colors.grey,
               ),
             );

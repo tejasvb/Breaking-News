@@ -22,9 +22,10 @@ class NewsCard extends StatelessWidget {
   final Pattern patternDate = '[0-9]{4}-[0-9]{2}-[0-9]{2}';
   @override
   Widget build(BuildContext context) {
+   final textSize = MediaQuery.of(context).size.height*0.001;
     bool check;
     String name;
-    ThemeData currentTheme = Theme.of(themeContext);
+    ThemeData _currentTheme = Theme.of(themeContext);
     RegExp regexDate = new RegExp(patternDate);
     if ((source == null) && (author == null)) {
       check = false;
@@ -50,7 +51,7 @@ class NewsCard extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          color: currentTheme.primaryColor,
+          color: _currentTheme.primaryColor,
           child: Center(
             child: Column(
               children: [
@@ -68,8 +69,8 @@ class NewsCard extends StatelessWidget {
                   child: Text(
                     title,
                     style: TextStyle(
-                        color: currentTheme.accentColor,
-                        fontSize: 16,
+                        color: _currentTheme.accentColor,
+                        fontSize: textSize*21,
                         fontFamily: 'PlayfairDisplay'),
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -84,10 +85,10 @@ class NewsCard extends StatelessWidget {
                         Flexible(
                           child: RichText(
                             overflow: TextOverflow.ellipsis,
-                            strutStyle: StrutStyle(fontSize: 14.0),
+                            strutStyle: StrutStyle(fontSize: textSize*14),
                             text: TextSpan(
                                 style: TextStyle(
-                                    color: currentTheme.secondaryHeaderColor),
+                                    color: _currentTheme.secondaryHeaderColor),
                                 text: name),
                           ),
                         ),
@@ -98,8 +99,8 @@ class NewsCard extends StatelessWidget {
                       if (check)
                         Icon(
                           Icons.fiber_manual_record,
-                          size: 14,
-                          color: currentTheme.secondaryHeaderColor,
+                          size: textSize*13,
+                          color: _currentTheme.secondaryHeaderColor,
                         ),
                       if (check)
                         SizedBox(
@@ -108,10 +109,10 @@ class NewsCard extends StatelessWidget {
                       Flexible(
                         child: RichText(
                           overflow: TextOverflow.ellipsis,
-                          strutStyle: StrutStyle(fontSize: 13.0),
+                          strutStyle: StrutStyle(fontSize: textSize*14),
                           text: TextSpan(
                               style: TextStyle(
-                                color: currentTheme.secondaryHeaderColor,
+                                color: _currentTheme.secondaryHeaderColor,
                               ),
                               text: date),
                         ),

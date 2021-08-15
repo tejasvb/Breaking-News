@@ -75,9 +75,12 @@ class _SpecificCountryNewsState extends State<SpecificCountryNews> with Automati
                 Builder(
                   builder: (BuildContext context1) {
                     return IconButton(
-                      icon: Icon(
-                        Icons.public_outlined,
-                        color: _currentTheme.accentColor,
+                      icon: Hero(
+                        tag: "listCountry",
+                        child: Icon(
+                          Icons.public_outlined,
+                          color: _currentTheme.accentColor,
+                        ),
                       ),
                       onPressed: () {
                         Navigator.push(

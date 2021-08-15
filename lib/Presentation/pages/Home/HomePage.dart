@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news/Presentation/bottomNavigationPages/SavedNews/SavedArticle.dart';
 import 'package:news/Presentation/bottomNavigationPages/SearchNews/SearchScreen.dart';
 import 'package:news/Presentation/bottomNavigationPages/specificCountryNews/SpecificCountryNews.dart';
-
+import 'package:flutter/foundation.dart' show kIsWeb;
 class HomePage extends StatefulWidget {
   static List<Widget> _widgetOptions = <Widget>[
     SpecificCountryNews(
@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
       sub: 'in',
     ),
     SearchScreen(),
+    if(!kIsWeb)
     SavedArticle(),
   ];
 
@@ -43,6 +44,7 @@ class _HomePageState extends State<HomePage> {
               label: 'Search',
               tooltip: "Search",
             ),
+            if(!kIsWeb)
             BottomNavigationBarItem(
               icon: Icon(Icons.bookmark_border),
               label: 'Saved',
