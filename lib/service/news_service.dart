@@ -15,6 +15,7 @@ class NewsService {
     } else {
       String topHeadLing =
           'https://newsapi.org/v2/top-headlines?country=$field&category=$category&apiKey=';
+      print('https://newsapi.org/v2/top-headlines?country=$field&category=$category&apiKey=f96331be8ca34b80855e89bb563105f1');
 
       return result(topHeadLing + API_KEY);
     }
