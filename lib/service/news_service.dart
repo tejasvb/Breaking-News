@@ -4,7 +4,7 @@ import 'package:news/models/api_response.dart';
 import 'package:news/models/NewsForListing.dart';
 
 class NewsService {
-  static const String API_KEY = 'f96331be8ca34b80855e89bb563105f1';
+  static const String API_KEY = API_KEY;
 
   Future<APIResponse<List<NewsForListing>>> getNewsList(
       {String category, String field, String type, String query}) {
