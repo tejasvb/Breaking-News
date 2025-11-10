@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news/News/news_bloc.dart';
 import 'package:news/Presentation/Widgets/SecondaryNewsCard.dart';
-
 import 'package:news/models/NewsForListing.dart';
-import 'package:news/models/api_response.dart';
-import 'package:news/service/news_service.dart';
+import 'package:provider/src/provider.dart';
 
 class SearchScreen extends StatefulWidget {
   @override
@@ -12,16 +11,14 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClientMixin {
-  NewsService get service => GetIt.I<NewsService>();
+
 
   final search = TextEditingController(text: '');
-  APIResponse<List<NewsForListing>> _apiResponse;
-
-  bool _isLoading = false;
+  NewsBloc _newsBloc;
 
   @override
   void initState() {
-    _fetchNews(search.text);
+    _newsBloc = context.read<NewsBloc>();
     super.initState();
   }
 
@@ -33,16 +30,7 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
 
   _fetchNews(String search) async {
     if(search.toLowerCase().trim().isEmpty) return
-    setState(() {
-      _isLoading = true;
-    });
-
-    _apiResponse = await service.getNewsList(
-        type: "everything", query: search.toLowerCase().trim());
-
-    setState(() {
-      _isLoading = false;
-    });
+    _newsBloc.add(GetNewsEvent(query: search,type:"everything"));
   }
 
   ThemeData _currentTheme;
@@ -74,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
                                   maxLength: 15,
                                   onSubmitted: (value) {
                                     setState(() {
-                                      _fetchNews(search.text);
+                                      _fetchNews(value);
                                     });
                                   },
                                   cursorRadius: Radius.circular(30),
@@ -111,46 +99,26 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
                       ),
                     ),
                   ),
-            Builder(
-              builder: (BuildContext _) {
-                if (search.text.trim().isEmpty) return Container();
+            BlocBuilder<NewsBloc, NewsState>(
+              builder: (context, state) {
+                if (state is NewsInitial) {
+                  return errorNews(errorMessage: "No News found");
+                } else if (state is NewsLoading) {
+                  return loadingNews();
+                } else if (state is NewsLoaded) {
+                  List<NewsForListing> newsList = state.apiResponse.data;
+                  if (newsList.length == 0) {
+                    return errorNews(errorMessage: "No News found");
+                  }
+                  if (search.text.trim().isEmpty) return Container();
+                  return allNews(newsList:newsList);
 
-                if (_isLoading) {
-                  return Center(
-                      child: CircularProgressIndicator(
-                    color: _currentTheme.accentColor,
-                  ));
                 }
-
-                if (_apiResponse.error) {
-                  return Text(_apiResponse.errorMessage);
+                if (state is NewsError) {
+                  return errorNews(errorMessage: state.errorMessage);
+                } else {
+                  return errorNews(errorMessage: "No News found");
                 }
-                if (_apiResponse.data != null) {
-                  return ListView.separated(
-                    physics: ScrollPhysics(),
-                    shrinkWrap: true,
-                    separatorBuilder: (BuildContext _, int index) => Divider(
-                        height: 3, color: _currentTheme.secondaryHeaderColor),
-                    itemBuilder: (BuildContext _, int index) {
-                      return SecondaryNewsCard(
-                        source: _apiResponse.data[index].source.toString(),
-                        author: _apiResponse.data[index].author.toString(),
-                        image: _apiResponse.data[index].urlToImage != null
-                            ? _apiResponse.data[index].urlToImage.toString()
-                            : "https://www.nmaer.com/sysimg/news-news-image.png",
-                        title: _apiResponse.data[index].title.toString(),
-                        publishedAt:
-                            _apiResponse.data[index].publishedAt.toString(),
-                        url: _apiResponse.data[index].url.toString(),
-                        themeContext: context,
-                      );
-                    },
-                    itemCount: _apiResponse.data.length,
-                  );
-                }
-                return Center(
-                  child: Text("no articles has found"),
-                );
               },
             ),
           ],
@@ -159,6 +127,56 @@ class _SearchScreenState extends State<SearchScreen> with AutomaticKeepAliveClie
     );
   }
 
+  Widget errorNews({String errorMessage}) {
+    return SafeArea(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/images/errorImage.png',
+            height: MediaQuery.of(context).size.height * 0.3,
+            width: MediaQuery.of(context).size.height * 0.3,
+          ), // author Icongeek26
+          Text(errorMessage,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+              )),
+        ],
+      ),
+    );
+  }
+
+  Widget loadingNews() {
+    return Center(
+        child: CircularProgressIndicator(
+          color: _currentTheme.accentColor,
+        ));
+  }
+
+  Widget allNews({List<NewsForListing> newsList}) {
+    return ListView.separated(
+      physics: ScrollPhysics(),
+      shrinkWrap: true,
+      separatorBuilder: (BuildContext _, int index) => Divider(
+          height: 3, color: _currentTheme.secondaryHeaderColor),
+      itemBuilder: (BuildContext _, int index) {
+        return SecondaryNewsCard(
+          source: newsList[index].source.toString(),
+          author: newsList[index].author.toString(),
+          image: newsList[index].urlToImage != null
+              ? newsList[index].urlToImage.toString()
+              : "https://www.nmaer.com/sysimg/news-news-image.png",
+          title: newsList[index].title.toString(),
+          publishedAt:
+          newsList[index].publishedAt.toString(),
+          url: newsList[index].url.toString(),
+          themeContext: context,
+        );
+      },
+      itemCount: newsList.length,
+    );
+  }
   @override
   bool get wantKeepAlive => true;
 }
